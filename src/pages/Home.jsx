@@ -1,13 +1,14 @@
+import  Container  from "../components/container/Container";
 import Banner from "../components/banner/banner";
 import FlashSales from "../components/flashsales/FlashSales";
 
 export default function Home() {
   return (
     <>
-      <div>
+      <Container>
         <Banner />
         <FlashSales />
-      </div>
+      </Container>
     </>
   );
 }
