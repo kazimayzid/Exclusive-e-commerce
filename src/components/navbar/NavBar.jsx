@@ -39,9 +39,9 @@ export default function Navbar() {
           </div>
           <div className="flex justify-center items-center gap-x-[24px]">
             <div className="relative w-56 bg-[#F5F5F5] rounded-[10px]">
-              <div className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none">
+              <div className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none cursor-pointer">
                 <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                  className="w-4 h-4 text-gray-500 dark:text-gray-400 cursor-pointer"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -75,6 +75,7 @@ export default function Navbar() {
           </div>
         </div>
       </Container>
+      <div className="border-b-[1px] border-[rgba(0,0,0,0.3)] mt-[16px]" ></div>
     </>
   );
 }
