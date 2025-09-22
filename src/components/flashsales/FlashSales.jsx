@@ -3,7 +3,7 @@ import CountDown from "../countDown/CountDown";
 
 export default function FlashSales() {
     return <>
-     <div className="mt-[140px]">
+     <div className="mt-[140px] mb-4">
         <div className="flex items-center gap-x-[16px]">
             <div className="w-[20px] h-[40px] bg-secondary rounded-[4px]"></div>
             <p className="font-poppins font-semibold text-[16px] leading-[20px] text-secondary">Today’s</p>
@@ -12,8 +12,10 @@ export default function FlashSales() {
             <h1 className="font-inter font-semibold text-[36px] leading-[48px] text-primary">Flash Sales</h1>
             <CountDown/>
         </div>
-        <div><ProductCard/></div>
-        <div></div>
+        <div className="mt-[40px]"><ProductCard/></div>
+        <div className="text-center mt-[60px]">
+            <button className="font-poppins font-medium text-[16px] leading-[24px] text-[#FAFAFA] bg-secondary py-4 px-12 rounded-[4px] cursor-pointer hover:bg-primary duration-300">View All Products</button>
+        </div>
      </div>
     </>
 }
