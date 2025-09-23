@@ -1,8 +1,10 @@
-import ProductCard from "../ProductCard/ProductCard";
-import { products } from "../productData/products";
+import ProductCard from "../productCard/ProductCard";
+import { products } from "../../productData/products";
 
 export default function BestSelling() {
-   const bestSellProducts = products.filter((items) => items.status === "bestSelling")
+  const bestSellProducts = products.filter(
+    (items) => items.status === "bestSelling"
+  );
   return (
     <>
       <div className="mt-[70px]">
@@ -21,7 +23,7 @@ export default function BestSelling() {
           </button>
         </div>
         <div className="mt-[60px]">
-            <ProductCard products={bestSellProducts}/>
+          <ProductCard products={bestSellProducts} />
         </div>
       </div>
     </>
