@@ -1,45 +1,40 @@
 import { Eye, Heart } from "lucide-react";
-import { products } from "../productData/products";
 import { BiSolidStar } from "react-icons/bi";
-export default function ProductCard() {
-  const flashSaleProducts = products.filter(
-    (items) => items.status === "flashSale"
-  );
-
+export default function ProductCard({ products }) {
   return (
     <>
       <div className="flex gap-x-[30px] overflow-hidden">
-        {flashSaleProducts.map((item, i) => (
+        {products.map((item, i) => (
           <div key={i}>
             <div className="overflow-hidden">
               <div className="relative group bg-[#F5F5F5] w-[270px] h-[250px] flex items-center justify-center rounded-[4px]">
-              <img
-                className="group-hover:scale-125 duration-300"
-                src={item.image}
-                alt={item.title}
-              />
-              <div className="absolute top-[12px] left-[12px] font-poppins font-normal text-[12px] leading-[18px] text-white py-[4px] px-[12px] bg-secondary rounded-[4px]">
-                -
-                {Math.floor(
-                  ((item.mainprice - item.offerprice) / item.mainprice) * 100
-                )}
-                %
-              </div>
-              <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[12px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
-                <Heart />
-              </div>
-              <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[54px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
-                <Eye />
-              </div>
-              <button
-                className="absolute bottom-0 w-full py-2 bg-primary text-white 
+                <img
+                  className="group-hover:scale-125 duration-300"
+                  src={item.image}
+                  alt={item.title}
+                />
+                <div className="absolute top-[12px] left-[12px] font-poppins font-normal text-[12px] leading-[18px] text-white py-[4px] px-[12px] bg-secondary rounded-[4px]">
+                  -
+                  {Math.floor(
+                    ((item.mainprice - item.offerprice) / item.mainprice) * 100
+                  )}
+                  %
+                </div>
+                <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[12px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
+                  <Heart />
+                </div>
+                <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[54px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
+                  <Eye />
+                </div>
+                <button
+                  className="absolute bottom-0 w-full py-2 bg-primary text-white 
                      transform translate-y-full opacity-0 
                      group-hover:translate-y-0 group-hover:opacity-100 
                      transition-all duration-300 cursor-pointer"
-              >
-                Add To Cart
-              </button>
-            </div>
+                >
+                  Add To Cart
+                </button>
+              </div>
             </div>
             <div className="mt-[16px]">
               <h1 className="font-poppins font-medium text-[16px] leading-[24px] text-black">
