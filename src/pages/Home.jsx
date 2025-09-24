@@ -4,6 +4,7 @@ import FlashSales from "../components/flashsales/FlashSales";
 import Catagories from "../components/catagories/Catagories";
 import BestSelling from "../components/bestSelling/bestSelling";
 import PromotionalProduct from "../components/promotionalProduct/PromotionalProduct";
+import OurProducts from "../components/ourProducts/OurProducts";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Catagories />
         <BestSelling />
         <PromotionalProduct />
+        <OurProducts/>
       </Container>
     </>
   );
