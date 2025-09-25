@@ -61,6 +61,19 @@ export default function ProductCard({ products }) {
                 ({item.rating})
               </span>
             </div>
+            <div>
+              {item.colors && (
+                <div className="flex gap-2 mt-2">
+                  {item.colors.map((color, i) => (
+                    <div
+                      key={i}
+                      className="w-5 h-5 rounded-full border p-0.5 cursor-pointer"
+                      style={{ backgroundColor: color }}
+                    ></div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       ))}

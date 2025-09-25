@@ -5,6 +5,7 @@ import Catagories from "../components/catagories/Catagories";
 import BestSelling from "../components/bestSelling/bestSelling";
 import PromotionalProduct from "../components/promotionalProduct/PromotionalProduct";
 import OurProducts from "../components/ourProducts/OurProducts";
+import Featured from "../components/featured/Featured";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <BestSelling />
         <PromotionalProduct />
         <OurProducts/>
+        <Featured/>
       </Container>
     </>
   );
