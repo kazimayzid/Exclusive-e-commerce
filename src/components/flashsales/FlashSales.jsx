@@ -21,7 +21,7 @@ export default function FlashSales() {
           </h1>
           <CountDown />
         </div>
-        <div className="mt-[40px]">
+        <div className="mt-[40px] flex gap-x-[30px] overflow-hidden">
           <ProductCard products={flashSaleProducts} />
         </div>
         <div className="text-center mt-[60px]">

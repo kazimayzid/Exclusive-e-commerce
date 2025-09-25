@@ -22,7 +22,7 @@ export default function BestSelling() {
             View All
           </button>
         </div>
-        <div className="mt-[60px]">
+        <div className="mt-[60px] flex gap-x-[30px] overflow-hidden">
           <ProductCard products={bestSellProducts} />
         </div>
       </div>
