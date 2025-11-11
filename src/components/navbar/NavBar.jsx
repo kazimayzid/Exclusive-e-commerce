@@ -1,7 +1,15 @@
 import Container from "../container/Container";
 import logo from "../../assets/logo.png";
 import { Heart, ShoppingCart } from "lucide-react";
+import { Link } from "react-router-dom";
 export default function Navbar() {
+  const navLink = [
+    { title: "Home", path: "home" },
+    { title: "Product", path: "product" },
+    { title: "Contact", path: "contact" },
+    { title: "About", path: "sbout" },
+    { title: " Sign Up", path: "sign Up" },
+  ];
   return (
     <>
       <Container>
@@ -12,30 +20,15 @@ export default function Navbar() {
             </a>
           </div>
           <div className="flex gap-x-[48px]">
-            <a
-              href="#"
-              className="font-poppins font-normal text-[16px] leading-[24px] text-primary hover:underline hover:underline-offset-5 duration-300 transition-all"
-            >
-              Home
-            </a>
-            <a
-              href="#"
-              className="font-poppins font-normal text-[16px] leading-[24px] text-primary hover:underline hover:underline-offset-5 duration-300 transition-all"
-            >
-              Contact
-            </a>
-            <a
-              href="#"
-              className="font-poppins font-normal text-[16px] leading-[24px] text-primary hover:underline hover:underline-offset-5 duration-300 transition-all"
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="font-poppins font-normal text-[16px] leading-[24px] text-primary hover:underline hover:underline-offset-5 duration-300 transition-all"
-            >
-              Sign Up
-            </a>
+            {navLink.map((nav, i) => (
+              <Link
+                key={i}
+                to={nav.path}
+                className="font-poppins font-normal text-[16px] leading-[24px] text-primary hover:underline hover:underline-offset-5 duration-300 transition-all"
+              >
+                {nav.title}
+              </Link>
+            ))}
           </div>
           <div className="flex justify-center items-center gap-x-[24px]">
             <div className="relative w-56 bg-[#F5F5F5] rounded-[10px]">
@@ -75,7 +68,7 @@ export default function Navbar() {
           </div>
         </div>
       </Container>
-      <div className="border-b-[1px] border-[rgba(0,0,0,0.3)] mt-[16px]" ></div>
+      <div className="border-b-[1px] border-[rgba(0,0,0,0.3)] mt-[16px]"></div>
     </>
   );
 }
