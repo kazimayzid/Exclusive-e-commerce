@@ -4,7 +4,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 export default function Navbar() {
   const navLink = [
-    { title: "Home", path: "home" },
+    { title: "Home", path: "/" },
     { title: "Product", path: "product" },
     { title: "Contact", path: "contact" },
     { title: "About", path: "sbout" },
