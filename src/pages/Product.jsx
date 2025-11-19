@@ -1,4 +1,4 @@
-import { ChevronRight, Eye, Heart } from "lucide-react";
+import { ChevronRight, Eye, Heart, Star } from "lucide-react";
 import Container from "../components/container/Container";
 import ProductCard from "../components/productCard/ProductCard";
 import { products } from "../productData/products";
@@ -22,7 +22,6 @@ export default function Product() {
   const [totalProduct, setTotalProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPageProduct, serPerPageProduct] = useState(2);
-
 
   // Product data fatching ================================
   const [productItem, setProductItem] = useState([]);
@@ -48,6 +47,28 @@ export default function Product() {
       .keys()
       .map((item) => item + 1),
   ];
+  // Rating Handler section =================================================
+  // const [rating, setRating] = useState({});
+  const ratingHandler = async (productId, index) => {
+    const ratingValue = index + 1; 
+console.log(productId);
+
+    try {
+      await axios.patch(
+        `http://localhost:3000/api/v1/product/updateproduct/${productId}`,
+        { rating: ratingValue }
+      );
+
+      setProductItem((prev) =>
+        prev.map((item) =>
+          item._id === productId ? { ...item, rating: ratingValue } : item
+        )
+      );
+    } catch (error) {
+      console.log("Rating update failed:", error);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -114,10 +135,10 @@ export default function Product() {
                         ${item.price}
                       </span>
                     </div>
-                    <div className="mt-2 flex gap-x-2">
-                      <div className="flex">
-                        {[...Array(5)].map((_, index) =>
-                          index < item.stars ? (
+                    <div className="mt-2 flex gap-x-2 items-center">
+                      <div className="flex gap-x-1">
+                        {/* {[...Array(5)].map((_, index) =>
+                          index < item.rating ? (
                             <BiSolidStar key={index} color="#FFAD33" />
                           ) : (
                             <BiSolidStar
@@ -125,10 +146,19 @@ export default function Product() {
                               className="text-black/25"
                             />
                           )
-                        )}
+                        )} */}
+                        {[...Array(5)].map((_, index) => (
+                          <Star
+                            key={index}
+                            onClick={() => ratingHandler(item._id, index)}
+                            color={index < item.rating ? "#FFAD33" : "black"}
+                            className="cursor-pointer"
+                            size={16}
+                          />
+                        ))}
                       </div>
                       <span className="font-poppins font-semibold text-[14px] leading-[21px] text-[rgba(0,0,0,0.5)]">
-                        ({item.rating})
+                        {item.rating}
                       </span>
                     </div>
                     <div>
@@ -148,18 +178,32 @@ export default function Product() {
                 </div>
               ))}
             </div>
-            <div className="flex gap-x-10">
-              <div>Prev</div>
+            <div className="flex justify-center mt-10 gap-x-10 mx-auto">
+              <button
+                hidden={currentPage === 1}
+                className="cursor-pointer font-medium text-black"
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                Prev
+              </button>
               {pageNum.map((num, i) => (
                 <div
                   key={i}
-                  onClick={() =>setCurrentPage(num)}
-                  className={`mx-[2px]  px-1.5 rounded-[4px] text-white hover:bg-red-400 duration-200 cursor-pointer ${currentPage === num ? "bg-red-400" : "bg-secondary"}`}
+                  onClick={() => setCurrentPage(num)}
+                  className={`mx-[2px]  px-1.5 rounded-[4px] text-white hover:bg-red-400 duration-200 cursor-pointer ${
+                    currentPage === num ? "bg-red-400" : "bg-secondary"
+                  }`}
                 >
                   {num}
                 </div>
               ))}
-              <div>Next</div>
+              <button
+                hidden={currentPage === pageNum.length}
+                className="cursor-pointer font-medium text-black"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                Next
+              </button>
             </div>
           </div>
         </div>
