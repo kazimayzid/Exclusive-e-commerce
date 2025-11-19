@@ -55,7 +55,7 @@ console.log(productId);
 
     try {
       await axios.patch(
-        `http://localhost:3000/api/v1/product/updateproduct/${productId}`,
+        `https://e-commerce-api-s7fz.onrender.com/api/v1/product/updateproduct/${productId}`,
         { rating: ratingValue }
       );
 
