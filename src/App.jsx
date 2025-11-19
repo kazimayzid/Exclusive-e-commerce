@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import "./App.css";
-import Navbar from "./components/navbar/NavBar";
-import RootLayout from "./layout/Rootlayout";
+
+import RootLayout from "../src/layout/RootLayout"
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 
