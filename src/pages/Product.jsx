@@ -1,10 +1,10 @@
 import { ChevronRight, Eye, Heart, Star } from "lucide-react";
 import Container from "../components/container/Container";
-import ProductCard from "../components/productCard/ProductCard";
-import { products } from "../productData/products";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BiSolidStar } from "react-icons/bi";
+
+import { Link } from "react-router-dom";
 export default function Product() {
   const sideBar = [
     { name: "Woman’s Fashion", icon: <ChevronRight /> },
@@ -21,7 +21,7 @@ export default function Product() {
   // Pagination functionality added=================================
   const [totalProduct, setTotalProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPageProduct, serPerPageProduct] = useState(2);
+  const [perPageProduct, setPerPageProduct] = useState(2);
 
   // Product data fatching ================================
   const [productItem, setProductItem] = useState([]);
@@ -50,8 +50,8 @@ export default function Product() {
   // Rating Handler section =================================================
   // const [rating, setRating] = useState({});
   const ratingHandler = async (productId, index) => {
-    const ratingValue = index + 1; 
-console.log(productId);
+    const ratingValue = index + 1;
+    console.log(productId);
 
     try {
       await axios.patch(
@@ -119,7 +119,7 @@ console.log(productId);
                      group-hover:translate-y-0 group-hover:opacity-100 
                      transition-all duration-300 cursor-pointer"
                       >
-                        Add To Cart
+                        <Link to={`/productdetails/${item._id}`}>Details</Link>
                       </button>
                     </div>
                   </div>
