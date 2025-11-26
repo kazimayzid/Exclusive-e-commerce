@@ -29,7 +29,7 @@ export default function Product() {
     try {
       const { data } = await axios.get(
         // "http://localhost:3000/api/v1/product/getallproduct"
-        `http://localhost:3000/api/v1/product/getallproduct?page=${currentPage}&size=${perPageProduct}`
+        `https://e-commerce-api-s7fz.onrender.com/api/v1/product/getallproduct?page=${currentPage}&size=${perPageProduct}`
       );
       setProductItem(data.data);
       setTotalProduct(data.total);
