@@ -40,13 +40,12 @@ export default function Product() {
 
   useEffect(() => {
     productData();
-  }, [currentPage]);
+  }, [currentPage, perPageProduct]);
 
-  const pageNum = [
-    ...Array(Math.ceil(totalProduct / perPageProduct))
-      .keys()
-      .map((item) => item + 1),
-  ];
+  const pageNum = Array.from(
+  { length: Math.ceil(totalProduct / perPageProduct) },
+  (_, i) => i + 1
+);
   // Rating Handler section =================================================
   // const [rating, setRating] = useState({});
   const ratingHandler = async (productId, index) => {
@@ -68,6 +67,8 @@ export default function Product() {
       console.log("Rating update failed:", error);
     }
   };
+  console.log(productItem);
+  
 
   return (
     <>

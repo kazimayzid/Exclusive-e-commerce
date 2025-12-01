@@ -1,6 +1,9 @@
 import { Eye, Heart } from "lucide-react";
+import { useContext } from "react";
 import { BiSolidStar } from "react-icons/bi";
+import { CartContext } from "../../cartContext/CartContext";
 export default function ProductCard({ products }) {
+  const cart = useContext(CartContext)
   return (
     <>
       {products.map((item) => (

@@ -1,7 +1,7 @@
 import Container from "../container/Container";
 import logo from "../../assets/logo.png";
 import { Heart, ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 export default function Navbar() {
   const navLink = [
     { title: "Home", path: "/" },
@@ -61,10 +61,10 @@ export default function Navbar() {
             <div>
               <Heart />
             </div>
-            <div>
+            <Link to={"/cartpage"}>
               {" "}
               <ShoppingCart />
-            </div>
+            </Link>
           </div>
         </div>
       </Container>
