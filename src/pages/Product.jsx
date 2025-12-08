@@ -1,6 +1,6 @@
 import { ChevronRight, Eye, Heart, Star } from "lucide-react";
 import Container from "../components/container/Container";
-
+import Loading from "../components/loading/Loading";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -43,9 +43,9 @@ export default function Product() {
   }, [currentPage, perPageProduct]);
 
   const pageNum = Array.from(
-  { length: Math.ceil(totalProduct / perPageProduct) },
-  (_, i) => i + 1
-);
+    { length: Math.ceil(totalProduct / perPageProduct) },
+    (_, i) => i + 1
+  );
   // Rating Handler section =================================================
   // const [rating, setRating] = useState({});
   const ratingHandler = async (productId, index) => {
@@ -68,7 +68,6 @@ export default function Product() {
     }
   };
   console.log(productItem);
-  
 
   return (
     <>
@@ -89,56 +88,59 @@ export default function Product() {
             </div>
           </div>
           <div className="w-[80%]">
-            <div className=" flex flex-wrap gap-5 justify-start ml-10 mt-10">
-              {productItem.map((item) => (
-                <div key={item._id}>
-                  <div className="overflow-hidden">
-                    <div className="relative group bg-[#F5F5F5] w-[270px] h-[250px] flex items-center justify-center rounded-[4px]">
-                      <img
-                        className="group-hover:scale-125 duration-300"
-                        src={item.image}
-                        alt={item.name}
-                      />
-                      <div className="absolute top-[12px] left-[12px] font-poppins font-normal text-[12px] leading-[18px] text-white py-[4px] px-[12px] bg-secondary rounded-[4px]">
-                        -
-                        {Math.round(
-                          ((item.mainprice - item.offerprice) /
-                            item.mainprice) *
-                            100
-                        )}
-                        %
-                      </div>
-                      <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[12px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
-                        <Heart />
-                      </div>
-                      <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[54px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
-                        <Eye />
-                      </div>
-                      <button
-                        className="absolute bottom-0 w-full py-2 bg-secondary hover:bg-primary text-white 
+            {productItem.length > 0 ? (
+              <div className=" flex flex-wrap gap-5 justify-start ml-10 mt-10">
+                {productItem.map((item) => (
+                  <div key={item._id}>
+                    <div className="overflow-hidden">
+                      <div className="relative group bg-[#F5F5F5] w-[270px] h-[250px] flex items-center justify-center rounded-[4px]">
+                        <img
+                          className="group-hover:scale-125 duration-300"
+                          src={item.image}
+                          alt={item.name}
+                        />
+                        <div className="absolute top-[12px] left-[12px] font-poppins font-normal text-[12px] leading-[18px] text-white py-[4px] px-[12px] bg-secondary rounded-[4px]">
+                          -
+                          {Math.round(
+                            ((item.mainprice - item.offerprice) /
+                              item.mainprice) *
+                              100
+                          )}
+                          %
+                        </div>
+                        <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[12px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
+                          <Heart />
+                        </div>
+                        <div className="w-[34px] h-[34px] rounded-full bg-white absolute right-[12px] top-[54px] flex items-center justify-center hover:bg-secondary hover:text-white duration-300">
+                          <Eye />
+                        </div>
+                        <button
+                          className="absolute bottom-0 w-full py-2 bg-secondary hover:bg-primary text-white 
                      transform translate-y-full opacity-0 
                      group-hover:translate-y-0 group-hover:opacity-100 
                      transition-all duration-300 cursor-pointer"
-                      >
-                        <Link to={`/productdetails/${item._id}`}>Details</Link>
-                      </button>
+                        >
+                          <Link to={`/productdetails/${item._id}`}>
+                            Details
+                          </Link>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mt-[16px]">
-                    <h1 className="font-poppins font-medium text-[16px] leading-[24px] text-black">
-                      {item.name}
-                    </h1>
-                    <div className="mt-2 flex gap-x-3">
-                      <span className="font-poppins font-medium text-[16px] leading-[24px] text-secondary">
-                        ${item.discount}
-                      </span>
-                      <span className="font-poppins font-medium text-[16px] leading-[24px] text-[rgba(0,0,0,0.5)] line-through">
-                        ${item.price}
-                      </span>
-                    </div>
-                    <div className="mt-2 flex gap-x-2 items-center">
-                      <div className="flex gap-x-1">
-                        {/* {[...Array(5)].map((_, index) =>
+                    <div className="mt-[16px]">
+                      <h1 className="font-poppins font-medium text-[16px] leading-[24px] text-black">
+                        {item.name}
+                      </h1>
+                      <div className="mt-2 flex gap-x-3">
+                        <span className="font-poppins font-medium text-[16px] leading-[24px] text-secondary">
+                          ${item.discount}
+                        </span>
+                        <span className="font-poppins font-medium text-[16px] leading-[24px] text-[rgba(0,0,0,0.5)] line-through">
+                          ${item.price}
+                        </span>
+                      </div>
+                      <div className="mt-2 flex gap-x-2 items-center">
+                        <div className="flex gap-x-1">
+                          {/* {[...Array(5)].map((_, index) =>
                           index < item.rating ? (
                             <BiSolidStar key={index} color="#FFAD33" />
                           ) : (
@@ -148,22 +150,22 @@ export default function Product() {
                             />
                           )
                         )} */}
-                        {[...Array(5)].map((_, index) => (
-                          <Star
-                            key={index}
-                            onClick={() => ratingHandler(item._id, index)}
-                            color={index < item.rating ? "#FFAD33" : "black"}
-                            className="cursor-pointer"
-                            size={16}
-                          />
-                        ))}
+                          {[...Array(5)].map((_, index) => (
+                            <Star
+                              key={index}
+                              onClick={() => ratingHandler(item._id, index)}
+                              color={index < item.rating ? "#FFAD33" : "black"}
+                              className="cursor-pointer"
+                              size={16}
+                            />
+                          ))}
+                        </div>
+                        <span className="font-poppins font-semibold text-[14px] leading-[21px] text-[rgba(0,0,0,0.5)]">
+                          {item.rating}
+                        </span>
                       </div>
-                      <span className="font-poppins font-semibold text-[14px] leading-[21px] text-[rgba(0,0,0,0.5)]">
-                        {item.rating}
-                      </span>
-                    </div>
-                    <div>
-                      {/* {item.colors && (
+                      <div>
+                        {/* {item.colors && (
                       <div className="flex gap-2 mt-2">
                         {item.colors.map((color, i) => (
                           <div
@@ -174,11 +176,14 @@ export default function Product() {
                         ))}
                       </div>
                     )} */}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <Loading />
+            )}
             <div className="flex justify-center mt-10 gap-x-10 mx-auto">
               <button
                 hidden={currentPage === 1}

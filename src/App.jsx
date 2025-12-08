@@ -6,7 +6,8 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
-import { CartContext } from "./cartContext/CartContext";
+
+import { OrderProvider } from "./provider";
 
 const router = createBrowserRouter([
   {
@@ -21,19 +22,12 @@ const router = createBrowserRouter([
   },
 ]);
 
-const initialState = [
-  {
-    productName: "",
-    
-  }
-]
-
 function App() {
   return (
     <>
-      <CartContext.Provider>
+      <OrderProvider>
         <RouterProvider router={router} />
-      </CartContext.Provider>
+      </OrderProvider>
     </>
   );
 }

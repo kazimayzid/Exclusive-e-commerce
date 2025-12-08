@@ -2,7 +2,11 @@ import Container from "../container/Container";
 import logo from "../../assets/logo.png";
 import { Heart, ShoppingCart } from "lucide-react";
 import { Link, Links } from "react-router-dom";
+import { useContext } from "react";
+import { OrderContext } from "../../context";
 export default function Navbar() {
+  const { orderDetails, setOrderDetails } = useContext(OrderContext);
+
   const navLink = [
     { title: "Home", path: "/" },
     { title: "Product", path: "product" },
@@ -61,9 +65,13 @@ export default function Navbar() {
             <div>
               <Heart />
             </div>
-            <Link to={"/cartpage"}>
-              {" "}
+            <Link to={"/cartpage"} className="relative">
               <ShoppingCart />
+              {orderDetails.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {orderDetails.length}
+                </span>
+              )}
             </Link>
           </div>
         </div>
