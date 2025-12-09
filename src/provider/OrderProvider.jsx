@@ -12,6 +12,7 @@ const OrderProvider = ({ children }) => {
       return [];
     }
   });
+console.log(orderDetails);
 
   useEffect(() => {
     localStorage.setItem("orderDetails", JSON.stringify(orderDetails));

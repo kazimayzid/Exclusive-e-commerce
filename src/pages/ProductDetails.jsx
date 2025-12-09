@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 import Loading from "../components/loading/Loading";
 import { FaStar } from "react-icons/fa";
 import { OrderContext } from "../context";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export default function ProductDetails() {
   const { orderDetails, setOrderDetails } = useContext(OrderContext);
 
@@ -32,15 +35,29 @@ export default function ProductDetails() {
     quantity: 0,
     size: "",
   });
+  const alreadyAdded = orderDetails.some(
+    (item) => item._id === dataOfProduct?._id
+  );
 
- const handleAdd = (data) => {
-  const newOrder = { ...data, ...additionalData };
-  setOrderDetails((prev) => [...prev, newOrder]);
-};
-
+  const handleAdd = (data) => {
+    const exists = orderDetails.some((item) => item._id === data._id);
+    if (!exists) {
+      if (additionalData.quantity > 0 && additionalData.size) {
+        const newOrder = { ...data, ...additionalData };
+        setOrderDetails((prev) => [...prev, newOrder]);
+        toast.success("Added to cart!", "center");
+      } else {
+        toast.error("Please select size and quantity!", "center");
+      }
+    } else {
+      toast.error("Already added!", "center");
+    }
+    console.log(data);
+  };
 
   return (
     <>
+    <ToastContainer position="top-center" />
       {dataOfProduct ? (
         <div className="flex justify-between gap-x-20">
           <div className="h-[600px] bg-white p-6 flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto  w-[50%]">
@@ -137,7 +154,7 @@ export default function ProductDetails() {
                 onClick={() => handleAdd(dataOfProduct)}
                 className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition cursor-pointer"
               >
-                Add to Cart
+                {alreadyAdded ? "Already Added" : "Add to Cart"}
               </button>
             </div>
 
