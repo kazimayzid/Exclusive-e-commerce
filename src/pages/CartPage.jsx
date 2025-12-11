@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { OrderContext } from "../context";
 import ProductDetails from "./ProductDetails";
 import { X } from "lucide-react";
@@ -6,7 +6,6 @@ import CouponBox from "../components/couponBox/CouponBox";
 
 export default function CartPage() {
   const { orderDetails, setOrderDetails } = useContext(OrderContext);
-  console.log(orderDetails);
 
   const products = [
     {
@@ -57,6 +56,26 @@ export default function CartPage() {
 
     setOrderDetails(updateOrder);
   };
+
+  // order summary section =======================
+  const [amountSummary, setAmountSummary] = useState({
+    subTotal: "",
+    couponAmount: 0,
+    total: "",
+  });
+  const subTotal = orderDetails.reduce(
+    (acc, current) => acc + current.price * current.quantity,
+    0
+  );
+  
+  useEffect(() =>{
+     setAmountSummary({
+      ...amountSummary,
+      subTotal: subTotal,
+      total: subTotal
+     })
+  }, [orderDetails])
+
   return (
     <>
       <div className="max-w-6xl mx-auto p-6">
@@ -113,19 +132,19 @@ export default function CartPage() {
 
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span className="font-medium">${totalPrice}</span>
+              <span className="font-medium">${amountSummary.subTotal}</span>
             </div>
 
             <div className="flex justify-between">
-              <span className="text-gray-600">Shipping</span>
-              <span className="font-medium">$10</span>
+              <span className="text-gray-600">Discount</span>
+              <span className="font-medium">{amountSummary.couponAmount}</span>
             </div>
 
             <hr />
 
             <div className="flex justify-between text-lg font-semibold">
               <span>Total</span>
-              <span>${totalPrice + 10}</span>
+              <span>${amountSummary.total}</span>
             </div>
 
             <button className="w-full bg-secondary cursor-pointer text-white py-3 rounded-lg hover:bg-primary duration-300 transition">
@@ -133,7 +152,7 @@ export default function CartPage() {
             </button>
           </div>
           <div className="col-start-3">
-            <CouponBox/>
+            <CouponBox />
           </div>
         </div>
       </div>
