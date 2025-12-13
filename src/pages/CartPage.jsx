@@ -3,6 +3,7 @@ import { OrderContext } from "../context";
 import ProductDetails from "./ProductDetails";
 import { X } from "lucide-react";
 import CouponBox from "../components/couponBox/CouponBox";
+import { Link } from "react-router";
 
 export default function CartPage() {
   const { orderDetails, setOrderDetails } = useContext(OrderContext);
@@ -67,14 +68,14 @@ export default function CartPage() {
     (acc, current) => acc + current.price * current.quantity,
     0
   );
-  
-  useEffect(() =>{
-     setAmountSummary({
+
+  useEffect(() => {
+    setAmountSummary({
       ...amountSummary,
       subTotal: subTotal,
-      total: subTotal
-     })
-  }, [orderDetails])
+      total: subTotal,
+    });
+  }, [orderDetails]);
 
   return (
     <>
@@ -147,9 +148,12 @@ export default function CartPage() {
               <span>${amountSummary.total}</span>
             </div>
 
-            <button className="w-full bg-secondary cursor-pointer text-white py-3 rounded-lg hover:bg-primary duration-300 transition">
+            <Link
+              to={"/checkout"}
+              className="w-full bg-secondary cursor-pointer text-white text-center block py-3 rounded-lg hover:bg-primary duration-300 transition"
+            >
               Proceed to Checkout
-            </button>
+            </Link>
           </div>
           <div className="col-start-3">
             <CouponBox />

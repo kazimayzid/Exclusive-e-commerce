@@ -8,6 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 
 import { OrderProvider } from "./provider";
+import Checkout from "./pages/CheckOutPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: "product", Component: Product },
       { path: "/productdetails/:id", Component: ProductDetails },
       { path: "/cartpage", Component: CartPage },
+      { path: "/checkout", Component: Checkout }
     ],
   },
 ]);
