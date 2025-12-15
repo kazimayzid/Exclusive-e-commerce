@@ -7,6 +7,9 @@ import { Link } from "react-router";
 
 export default function CartPage() {
   const { orderDetails, setOrderDetails } = useContext(OrderContext);
+  const [coupon, setCoupon] = useState(0);
+  console.log(coupon);
+  
 
   const products = [
     {
@@ -156,7 +159,7 @@ export default function CartPage() {
             </Link>
           </div>
           <div className="col-start-3">
-            <CouponBox />
+            <CouponBox setCoupon={setCoupon} />
           </div>
         </div>
       </div>
